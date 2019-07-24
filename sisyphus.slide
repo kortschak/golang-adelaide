@@ -1,0 +1,86 @@
+Sisyphus
+A package for building sysfs-like file systems that do nothing
+
+Dan Kortschak
+Golang Adelaide
+
+
+* Toys
+
+* EV3
+
+.image sisyphus/images/ev3_turtle.jpeg 500 _
+
+* Programming
+
+LabVIEW EV3-G
+
+.image sisyphus/images/ev3-g.jpeg 450 _
+
+* ev3dev
+
+ev3dev is a Debian Linux-based operating system that runs on several LEGO® MINDSTORMS compatible platforms including the LEGO® MINDSTORMS EV3 and similar platforms.
+
+.image sisyphus/images/logo_ev3dev_mono.png
+.caption [[https://www.ev3dev.org/][www.ev3dev.org]]
+
+* ev3go
+
+.image sisyphus/images/gopherbrick.svg 300 _
+
+The ev3go packages are the Go language binding for ev3dev system.
+
+Essentially a thin wrapper around the `/sysfs/class` file systems that ev3dev provides to control sensors and motors.
+
+* ev3go
+
+.iframe sisyphus/html/ev3dev.html 550 960
+
+* Testing
+
+* How to test the correctness of the sysfs interface shim?
+
+There is [[sisyphus/html/linear.html][lots]] [[sisyphus/html/sensor.html][of]] [[sisyphus/html/tacho.html][boring]] [[sisyphus/html/servo.html][code]] that calls a kernel of [[sisyphus/html/ev3dev_code.html][sysfs- and ev3dev]]-aware functions.
+
+Run integration tests on an EV3 for each PR?
+
+Devise a reasonable simulation of the device that can run anywhere?
+
+
+* Sisyphus
+
+He was punished for his self-aggrandizing craftiness and deceitfulness by being forced to roll an immense boulder up a hill only for it to roll down when it nears the top, repeating this action for eternity. Through the classical influence on modern culture, tasks that are both laborious and futile are therefore described as Sisyphean.
+
+.image sisyphus/images/titian_sisyphus.jpg 350 _
+
+
+* FUSE
+
+Filesystem in Userspace provides a way to mock the /sysfs/class file system on testing infrastructure.
+
+From WP:
+
+FUSE is particularly useful for writing virtual file systems. Unlike traditional file systems that essentially work with data on mass storage, virtual filesystems don't actually store data themselves. They act as a view or translation of an existing file system or storage device.
+
+*In*principle,*any*resource*available*to*a*FUSE*implementation*can*be*exported*as*a*file*system.*
+
+There is a FUSE package for Go, originally base on the FUSE library by Russ Cox.
+
+* basil.org/fuse
+
+.iframe sisyphus/html/fuse.html 550 960
+
+
+* ev3go/sisyphus
+
+* ev3go/sisyphus
+
+.iframe sisyphus/html/sisyphus.html 500 960
+
+This allows you to write code [[sisyphus/html/sisyphus_test.html][like this]].
+
+* Caveats
+
+There is a potential for [[sisyphus/html/tacho_test.html][a lot of boiler plate]].
+
+Incorrect use of locks will hang your kernel!
