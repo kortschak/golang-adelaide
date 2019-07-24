@@ -26,7 +26,7 @@ ev3dev is a Debian Linux-based operating system that runs on several LEGO® MIND
 
 * ev3go
 
-.image sisyphus/images/gopherbrick.svg 300 _
+.image sisyphus/images/gopherbrick.png 300 _
 
 The ev3go packages are the Go language binding for ev3dev system.
 
