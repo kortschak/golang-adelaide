@@ -1,0 +1,397 @@
+Beyond a joke: Human communication in Go
+
+# This presentation requires a go1.6 executable to be installed in $PATH.
+
+* Programming is primarily human communication
+
+[P]rograms must be written for people to read, and only incidentally for machines to execute.
+.caption Hal Abelson and Gerald Sussman — [[https://mitpress.mit.edu/sites/default/files/sicp/index.html][Structure and Interpretation of Computer Programs]]
+
+The most important skill for a programmer is the ability to effectively communicate ideas.
+.caption Gastón Jorquera — [[https://gaston.life/books/effective-programming/][My Notes on "Effective Programming"]]
+
+These comments refer to the ability to communicate in the context of an engineering problem.
+
+* Programming facilitating human communication — art
+
+Programming has been for quite some time a tool for production of art.
+
+Even in Go...
+
+[[https://github.com/kortschak/go-stippling][`go-stippling`]] originally at `code.google.com/p/go-stippling` by Job van der Zwan.
+
+However...
+
+the engineering process can be turned around and be made to be the subject of the art.
+
+*This* is the art.
+
+Can lead to fun ... and sometimes even products.
+
+* Life imitates art
+
+.image jokes/images/compiling.png
+.caption [[https://www.xkcd.com/303/][xkcd/compiling]]
+
+"I started another compilation, turned my chair around to face Robert, and started asking pointed questions. Before the compilation was done, we'd roped Ken in and had decided to do something."
+.caption [[https://commandcenter.blogspot.com/2012/06/less-is-exponentially-more.html][Less is exponentially more]]
+
+* Jokes
+
+* Jokes
+
+"Humor has been called the 'killer app' of language; it showcases the speed, playfulness, and flexibility of human cognition, and can instantaneously put people in a positive mood."
+.caption [[https://www.frontiersin.org/articles/10.3389/fphy.2016.00053/full][Toward a Quantum Theory of Humor]]
+
+Jokes are an integral part of human communication and can be used to defuse difficult situations and safely raise concerns in otherwise unsafe interpersonal environments.
+
+But also just to have fun.
+
+* A long history of jokes in Go
+
+Why did the GitHub contributors time-line extend back into the 1970s?
+
+.image jokes/images/commits.png 400 _
+
+	~/go $ git log --reverse -p
+
+* The first commits...
+
+	commit 7d7c6a97f815e9279d08cfaea7d5efb5e90695a8
+	Author: Brian Kernighan <bwk>
+	Date:   Tue Jul 18 19:05:45 1972 -0500
+
+	    hello, world
+	    
+	    R=ken
+	    DELTA=7  (7 added, 0 deleted, 0 changed)
+
+	diff --git a/src/pkg/debug/macho/testdata/hello.b b/src/pkg/debug/macho/testdata/hello.b
+	new file mode 100644
+	index 0000000000..05c4140424
+	--- /dev/null
+	+++ b/src/pkg/debug/macho/testdata/hello.b
+	@@ -0,0 +1,7 @@
+	+main( ) {
+	+       extrn a, b, c;
+	+       putchar(a); putchar(b); putchar(c); putchar('!*n');
+	+}
+	+a 'hell';
+	+b 'o, w';
+	+c 'orld';
+
+* The first commits...
+
+	commit 0bb0b61d6a85b2a1a33dcbc418089656f2754d32
+	Author: Brian Kernighan <bwk>
+	Date:   Sun Jan 20 01:02:03 1974 -0400
+
+	    convert to C
+	    
+	    R=dmr
+	    DELTA=6  (0 added, 3 deleted, 3 changed)
+
+	diff --git a/src/pkg/debug/macho/testdata/hello.b b/src/pkg/debug/macho/testdata/hello.b
+	deleted file mode 100644
+	index 05c4140424..0000000000
+	--- a/src/pkg/debug/macho/testdata/hello.b
+	+++ /dev/null
+	@@ -1,7 +0,0 @@
+	-main( ) {
+	-       extrn a, b, c;
+	-       putchar(a); putchar(b); putchar(c); putchar('!*n');
+	-}
+	-a 'hell';
+	-b 'o, w';
+
+	[snip]
+
+* The first commits...
+
+	commit 0744ac969119db8a0ad3253951d375eb77cfce9e
+	Author: Brian Kernighan <research!bwk>
+	Date:   Fri Apr 1 02:02:04 1988 -0500
+
+	    convert to Draft-Proposed ANSI C
+	    
+	    R=dmr
+	    DELTA=5  (2 added, 0 deleted, 3 changed)
+
+	diff --git a/src/pkg/debug/macho/testdata/hello.c b/src/pkg/debug/macho/testdata/hello.c
+	index 2264d04fbe..8626b30633 100644
+	--- a/src/pkg/debug/macho/testdata/hello.c
+	+++ b/src/pkg/debug/macho/testdata/hello.c
+	@@ -1,3 +1,6 @@
+	-main() {
+	-       printf("hello, world");
+	+#include <stdio.h>
+	+
+	+main()
+	+{
+	+       printf("hello, world\n");
+	 }
+
+* The first commits...
+
+	commit d82b11e4a46307f1f1415024f33263e819c222b8
+	Author: Brian Kernighan <bwk@research.att.com>
+	Date:   Fri Apr 1 02:03:04 1988 -0500
+
+	    last-minute fix: convert to ANSI C
+	    
+	    R=dmr
+	    DELTA=3  (2 added, 0 deleted, 1 changed)
+
+	diff --git a/src/pkg/debug/macho/testdata/hello.c b/src/pkg/debug/macho/testdata/hello.c
+	index 8626b30633..a689d3644e 100644
+	--- a/src/pkg/debug/macho/testdata/hello.c
+	+++ b/src/pkg/debug/macho/testdata/hello.c
+	@@ -1,6 +1,8 @@
+	 #include <stdio.h>
+	 
+	-main()
+	+int
+	+main(void)
+	 {
+	        printf("hello, world\n");
+	+       return 0;
+	 }
+
+* The first commits...
+
+	commit 18c5b488a3b2e218c0e0cf2a7d4820d9da93a554
+	Author: Robert Griesemer <gri@golang.org>
+	Date:   Sun Mar 2 20:47:34 2008 -0800
+
+	    Go spec starting point.
+	    
+	    SVN=111041
+
+	diff --git a/doc/go_spec b/doc/go_spec
+	new file mode 100644
+	index 0000000000..b9fc63912e
+	--- /dev/null
+	+++ b/doc/go_spec
+	@@ -0,0 +1,1197 @@
+	+The Go Annotated Specification
+	+
+	+This document supersedes all previous Go spec attempts.  The intent is
+	+to make this a reference for syntax and semantics.  It is annotated
+	+with additional information not strictly belonging into a language
+	+spec.
+
+	[snip]
+
+* Special keywords
+
+Since the first parser/lexer there have been five undocumented keywords in the language.
+
+	commit cb87526ce3531557ccf69969de4c8018956b10b5
+	Author: Ken Thompson <ken@golang.org>
+	Date:   Fri Mar 28 13:41:41 2008 -0700
+
+	    SVN=114202
+
+	[snip]
+
+	+       "notwithstanding",              LIGNORE,        Txxx,
+	+       "thetruthofthematter",          LIGNORE,        Txxx,
+	+       "despiteallobjections",         LIGNORE,        Txxx,
+	+       "whereas",                      LIGNORE,        Txxx,
+	+       "insofaras",                    LIGNORE,        Txxx,
+
+.play jokes/code/go_1.6_keywords.go /START/,/END/
+
+* Special keywords
+
+There are continued references to these keywords in the project...
+
+	commit c6282e7ac5a73809b8423a2abc45940148eb5bc7
+	Author: Josh Bleecher Snyder <josharian@gmail.com>
+	Date:   Mon Dec 31 18:43:38 2018 -1000
+
+	    doc: 2019 is the Year of the Gopher
+	    
+	    whereas this is a longstanding tradition
+	    and insofaras it is worth continuing such traditions
+	    and notwithstanding an attempt at future-proofing
+	    thetruthofthematter is that I have been waiting for years to send this change
+	    so despiteallobjections I have updated the copyright year.
+	    
+	    Change-Id: I55961b15a7eda35d84fdd9250afdbe19f0bf8412
+	    Reviewed-on: https://go-review.googlesource.com/c/155928
+	    Reviewed-by: Emmanuel Odeke <emm.odeke@gmail.com>
+
+* Special keywords
+
+Unfortunately they don't work anymore.
+
+.play jokes/code/keywords.go
+
+They were removed when the lexer and parser were overhauled in 2016 in [[https://github.com/golang/go/commit/57df2f802f0417f08100ff8002f3b062e695e148][`57df2f80`]].
+
+	-       // 💩
+	-       "notwithstanding":      LIGNORE,
+	-       "thetruthofthematter":  LIGNORE,
+	-       "despiteallobjections": LIGNORE,
+	-       "whereas":              LIGNORE,
+	-       "insofaras":            LIGNORE,
+
+
+* Jokes outside the project
+
+* Campher
+
+Many embedded languages have been written or adopted for Go applications.
+
+Brad Fitzpatrick, a member of the Go team, was also the original author of LiveJournal which was written in Perl.
+
+Brad provided an option that no one asked for, [[https://github.com/bradfitz/campher][campher]].
+
+	What do you get when you cross a Camel with a Gopher?
+
+	Campher!
+
+	Perl in Go.
+
+"Embed Perl in Go. This works, but was a joke for a presentation. Don't use."
+
+
+* You can't parse [X]HTML with regex
+
+.image jokes/images/parse_xhtml.png 520 _
+.caption [[https://stackoverflow.com/questions/1732348/regex-match-open-tags-except-xhtml-self-contained-tags/][You can't parse [X]HTML with regex]] by [[https://stackoverflow.com/users/18936/bobince][bobince]]
+
+* You can't parse [X]HTML with regex
+
+[[https://github.com/kortschak/zalgo][zalgo]] _finally_ brings support for Zalgo text to Go.
+
+    z := zalgo.NewCorrupter(os.Stdout)
+    z.Zalgo = func(n int, r rune, z *zalgo.Corrupter) bool {
+        z.Up += 0.1
+        z.Middle += complex(0.01, 0.01)
+        z.Down += complex(real(z.Down)*0.1, 0)
+        return false
+    }
+    z.Up = complex(0, 0.2)
+    z.Middle = complex(0, 0.2)
+    z.Down = complex(0.001, 0.3)
+
+
+To ͪ͞i͝n͙v͟o̟ke̷ ̢̝t͓ͪh̨e̖ ͨ͟h͇iv̋e-̪m̘i̹n̑d̝ ͏̺re̞̓͡p͢r͡és̷e̎͞ņ̿͐͒tį̊ng̃͢ ̓̽c̨̰ͬ̇ḫ͞a͢o͍͑s̐ͣ́.
+I̛ͭ̌n̪̉̓̀v̒͢ǫk͐͝in̸͆g ͚̑̔͠t͓̽ͤ͡h̦͒͆͜e̜̿ ͢f̸e͂͏̻e̵ļi͂͗̀n̡ͤ̋g̢̾ ̵̹́̊ơf̲͞ ̉͢c̎̏̉͟h̘̒̾̆͠â̧ǫ͖̈̂̓ͫs̫̳.̋҉̪
+W͍̗͟í̗t̺̬̏͊̌̕ẖ̢̎̏ ͔̈͝ŏ̻̊ͧ̀u̕t̨̲ͯ̿ ̭͂ͨͮ͆ͮ̈͢o̻̍͡r̠̎͢ͅḏ͐͟ë̢͙̇̿̽r͏͓̮.̴̋
+T͇͇͌ͣ͊͝h̦̳̽ͫͬ́e̥̤̬̐͛ͥ͠ ̶̱̝͎͇ͦ̈́͑͊N̨̹͎ͤȩ͈̻̲̕ͅz̨̫̫̼͕̱̜̆͢p̵̟͙̤͇̈́͂̎̽̀ė̷ͦ͏͚̤̘̜͓̲r̶͎͑̄̀d̛͖̠̣̣̦̽͝į̷͔̲̦̩̜̮͈͒ą̨͈̘̥̥͉ͨ͑͐n̸̲̜̳͓̱̙͌͡ ͋̈̍̑͝҉̥͈͎̝h̢̥̹̣̖̱̓͊͡ͅiͦ̋̄͞҉̜͎̳̗ͅv̵̨̙͙̰͍̼ͧ̈́ͅę̣͓͈̣̱̞̚͠ͅ-̷̛͖̜͎̠̼̻͑͆m͙̺̦̱͚̋ͣ͘͞ͅi̷̷̲̯̣̺͓͉̰͈n͚̘̣̳̥̥̂̊͢͞d̨̘̣͓̮̱̓͌́̕ ̤̝̼͇͇̩̘̳͘͜ǫ̴̣̙͙̦̝̠̮̈f̡͙̞̬̤̪͙̊͛͟ ͕̖̉͒ͨ̒ͨ́͝ͅċ̡͈͔̦̙̤͎͞ͅh͐̐҉̲̪̼̮̫̼͜ą̰̘̙͙͓̘̲̐͠o̡̩͉͓̫̼͗͂́͟ṡ̸̪͎̱̭͙͎ͭ͜.̝̗̪̑ͭ̿͆ͩ̀͞ ͌͐̅ͦ̋̍͛̌͏̨Z̝̝͎̫ͭ͊ͤ̚͟͝ą̳͙̹͉͖͉̎͘ͅl̸͈͖̝̣ͩͬͣ̚͝g̸̷̜̝͍̲͛̊̎͊ó̵̗͉̠̯̬͎͐͝.͡͏̩̥̖͉͓͙̺̲
+H̢͍̺͖͂̓͗ͬ̍̀e̼͇̦̰͔͖͂͒̕͡ ̧̭͈̖̟͕̃̓ͦ͠w̴̷͈̰̻͈͕̋͒̓h̑̔̀̿ͤ̓͏̱̰͘o̵̸͈͔̫͔͍̤̓̊ ̴͖̞͚̯̝͐͛ͫ͡W̷̱͖̲̤̬̃̔͂͝ạ̸͍̇̔̑̑͆ͩ͝ị̢̢̯̠͕̞̓ͪ͛ţ̴̜̝̞̭̑ͬ̄ͥs̛̲͙͕̪̓̿̑͛͡ ̣̰͎̽̏̄́̊̀͘B̨͔͕̮̝͕̩̓̂͡ẹ̴͍̟̮̅͛ͫ̕ͅh̆̅ͨ̒ͨ͏̮̙̠͠í̻̩̭̫͎ͯ̚͡͠ṅ̵̢̜̪̮̩̣ͤ͂d̘̮͇̟̺̖ͦ͒̀͜ ̸̰̣̳̭̜̈́́̀ͅT̸̢͕̬̯͎͒ͤ͗ͦh̷̵̥̫̻͓͔̖̃̄ę̞͇̗̣̫̟̼̎͡ ̴̧͎̠͇̥̪̬ͮ͛W̶̨͖͖͈͎̌͆̌͐a̷̧̺̦͚̯̹ͣ̚ͅl̢̥̹̜͑̑ͣͩ̂͟l̃ͧͩͭ͏̹͈̬͡ͅ.̢̯̔́͆ͩͪ͊̑͟
+Z̛̝͕̫͎ͦ̓̓́͡Ḁ̧͖̣͎̋̀ͯ̈̕L̷̹̥̣̪̮̩̅̄͝G̱̭͔̜̹͊͆̃͝͠O̍͐͐͏̷̟̰̼͉̰!̴͎̩̣̇͗̈́̀̅͡
+
+* Zalgo
+
+	f54d23f Commit to Zalgo!
+	11fe186 Example comes.
+	2d25f7b Prostrate before Zalgo.
+	865cf1d Default comes!
+	7f03e42 Zalgo can destroy corruption.
+	4a35e0b Pestilence!
+	62baf44 Zalgo causes naught but corruption.
+	c9c705d Cannot consume XML/HTML.
+	f064391 Vermin!
+	fc6d7ed Smite the unchosen!
+	8c91a4a Substratal churn.
+	1282022 Form the light, and create darkness.
+	a30c51e Disputationem non ex documento hominibus.
+	344d658 Show a nice face to newcomers, and destroy them afterwards
+
+.image jokes/images/no_xml.png
+
+* Zalgo
+
+.image jokes/images/remove.png
+.image jokes/images/angry.png
+
+
+* Quaternions
+
+.image jokes/images/quaternions.png 550 _
+
+* Quaternions
+
+.image jokes/images/quat.png 550 _
+
+* Quaternions
+
+.image jokes/images/num.png
+
+
+* Watching the world burn
+
+* Watching the world burn
+
+Some jokes are dangerous; [[https://en.wikipedia.org/wiki/Poe%27s_law][Poe's law]] makes this so.
+
+Jokes involving cryptography, embedded interpreters and runtime abuse are among these.
+
+#geocrypt
+
+* yaegiconf
+
+.image jokes/images/config.png 550 _
+
+* yaegiconf
+
+I like Go syntax and configuration structs work well for me, so let's leverage a Go interpreter to parse these for configuration files.
+
+.image jokes/images/yaegiconf.png _ 950
+.caption [[https://godoc.org/github.com/kortschak/yaegiconf][github.com/kortschak/yaegiconf]]
+
+.play jokes/code/yaegiconf.go /^func main/,/^}/
+
+* yaegiconf
+
+.play -edit jokes/code/old/yaegiconf_bad.go /^func main/,/^}/
+
+Working on this has led me to contribute back to yaegi...
+
+	714253c interp: add eval cancelation by semaphore
+
+so that this package can actually be used with reasonable safety.
+
+.play jokes/code/new/yaegiconf_bad.go /3f738dc/
+
+So I guess the joke's on me.
+
+
+* gls
+
+[[https://github.com/jtolds/gls][github.com/jtolds/gls]] provides goroutine-local storage.
+
+*How*it*works*
+
+Go doesn't give you ... any kind of access to the stack pointer, or frame pointer, or goroutine id, or anything contextual about your current stack
+
+But it does give you the stack.
+
+So, we define 16 special functions and embed base-16 tags into the stack using the call order of those 16 functions. Then, we can read our tags back out of the stack looking at the callers list.
+
+We then use these tags as an index into a traditional map for implementing this library.
+
+* gls
+
+*What*are*people*saying?*
+
+"Wow, that's horrifying."
+
+"This is the most terrible thing I have seen in a very long time."
+
+"Where is it getting a context from? Is this serializing all the requests? What the heck is the client being bound to? What are these tags? Why does he need callers? Oh god no. No no no."
+
+* gls
+
+.play jokes/code/goid.go /START/,
+
+* gls
+
+It's imported by serious packages.
+
+.image jokes/images/smartystreets.png _ 900
+.caption https://godoc.org/github.com/jtolds/gls?importers
